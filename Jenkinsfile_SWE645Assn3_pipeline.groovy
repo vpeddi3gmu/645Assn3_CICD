@@ -4,6 +4,7 @@ pipeline {
         docker_backend = "vpeddi3/swe645assn3"
         docker_build = ''
         docker_frontend = "vpeddi3/swe645assn3ui"
+        git_auth_token='SWE645_GIT_ID'
     }
     agent any
     
@@ -11,7 +12,7 @@ pipeline {
         stage('Cloning Git Frontend Code') {
             steps{
                 echo 'Cloning Git for Frontend Code..'
-                git 'https://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@github.com/vpeddi3gmu/645Assn3_UI.git'
+                git 'https://$git_auth_token@github.com/vpeddi3gmu/645Assn3_UI.git'
                 
                 
             }
@@ -53,7 +54,7 @@ pipeline {
          stage('Cloning Git for Backend Code') {
             steps{
                 echo 'Cloning Git for Backend Code..'
-                git 'https://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@github.com/vpeddi3gmu/645Assn3_BE.git'
+                git 'https://$git_auth_token@github.com/vpeddi3gmu/645Assn3_BE.git'
                 
                 
             }
@@ -92,7 +93,7 @@ pipeline {
         stage('Cloning Git for Deploying continers on Kubernetes cluster') {
             steps{
                 echo 'Cloning Git for Deploying continers on Kubernetes cluster..'
-                git 'https://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@github.com/vpeddi3gmu/645Assn3_CICD.git'
+                git 'https://$git_auth_token@github.com/vpeddi3gmu/645Assn3_CICD.git'
                 
                 
             }
