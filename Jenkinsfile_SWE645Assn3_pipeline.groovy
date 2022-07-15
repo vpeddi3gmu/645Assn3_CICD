@@ -10,6 +10,7 @@ pipeline {
     stages {
         stage('Cloning Git Frontend Code') {
             steps{
+                echo 'Cloning Git for Frontend Code..'
                 git 'https://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@github.com/vpeddi3gmu/645Assn3_UI.git'
                 
                 
@@ -18,11 +19,11 @@ pipeline {
 
         stage('Building and Containerizing the Frontend Code ') {
             steps {
-                echo 'building backend..'
+                echo 'Building and Containerizing the Frontend Code..'
                 script {
                         sh'''
                         #!/bin/bash
-                        ls
+                        ls -ltr
                         '''
                   docker_build = docker.build(docker_frontend + ":latest")
                 }
@@ -33,6 +34,7 @@ pipeline {
         
         stage('Pusing Frontend Image to Docker repo') {
             steps{
+                echo 'Pusing Frontend Image to Docker repo..'
                 script{
                     docker.withRegistry('',docker_credentails){
                         sh 'docker tag $docker_frontend:latest $docker_frontend:$BUILD_NUMBER'
@@ -63,7 +65,7 @@ pipeline {
                 script {
                         sh'''
                         #!/bin/bash
-                        ls
+                        ls -ltr
                         '''
                   docker_build = docker.build(docker_backend + ":latest")
                 }
@@ -85,14 +87,26 @@ pipeline {
             }
         }
 
+
+
+        stage('Cloning Git for Deploying continers on Kubernetes cluster') {
+            steps{
+                echo 'Cloning Git for Deploying continers on Kubernetes cluster..'
+                git 'https://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@github.com/vpeddi3gmu/645Assn3_CICD.git'
+                
+                
+            }
+        }
+
         stage('Deploying both Frontend and Backend containers on Kubernetes cluster') {
             steps{
                 script{
                         sh'''
                         #!/bin/bash
-                        ls
+                        ls -ltr
                         kubectl delete deployment survey-deployment-be survey-deployment-ui
                         kubectl delete svc surveyservicebe surveyserviceui
+                        kubectl create -f swe645_assn3_surveyform_full_stack_deployment_config.yaml
                         '''
                 }
             }
