@@ -104,8 +104,8 @@ pipeline {
                         sh'''
                         #!/bin/bash
                         ls -ltr
-                        kubectl delete deployment survey-deployment-be survey-deployment-ui
-                        kubectl delete svc surveyservicebe surveyserviceui
+                        kubectl delete deployment survey-deployment-be survey-deployment-ui --ignore-not-found=true
+                        kubectl delete svc surveyservicebe surveyserviceui --ignore-not-found=true
                         kubectl create -f swe645_assn3_surveyform_full_stack_deployment_config.yaml
                         '''
                 }
