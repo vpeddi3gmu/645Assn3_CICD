@@ -1,0 +1,99 @@
+# Vamsi Krishna Peddi
+# 
+# This was manually written file
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: survey-deployment-ui
+  labels:
+    app: survey_form_ui_dep
+    tier: survey_war_ui_dep
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: survey_form_ui
+      tier: survey_war_ui
+  template:
+    metadata:
+      name: survey_form_ui
+      labels:
+        app: survey_form_ui
+        tier: survey_war_ui
+    spec:
+      containers:
+      - name: swe645assn3ui
+        image: registry.hub.docker.com/vpeddi3/swe645assn3ui:latest
+        ports:
+        - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: surveyserviceui
+  labels:
+    app: suvery_service_ui_label
+spec:
+  type: NodePort
+  ports:
+   - targetPort: 80
+     port: 80
+     protocol: TCP
+     nodePort: 30044
+  selector:
+     app: survey_form_ui
+     tier: survey_war_ui
+
+---
+
+# Vamsi Krishna Peddi
+# 
+# This was manually written file
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: survey-deployment-be
+  labels:
+    app: survey_form_be_dep
+    tier: survey_war_be_dep
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: survey_form_be
+      tier: survey_war_be
+  template:
+    metadata:
+      name: survey_form_be
+      labels:
+        app: survey_form_be
+        tier: survey_war_be
+    spec:
+      containers:
+      - name: swe645assn3
+        image: registry.hub.docker.com/vpeddi3/swe645assn3:latest
+        ports:
+        - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: surveyservicebe
+  labels:
+    app: suvery_service_be_label
+spec:
+  type: NodePort
+  ports:
+   - targetPort: 8080
+     port: 80
+     protocol: TCP
+     nodePort: 30055
+  selector:
+     app: survey_form_be
+     tier: survey_war_be
