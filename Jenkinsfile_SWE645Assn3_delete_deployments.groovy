@@ -1,7 +1,7 @@
 pipeline {
 
     agent any
-
+    stages {
         stage('Deleting the deployments and services of both Frontend and Backend containers on Kubernetes cluster') {
             steps{
                 script{
@@ -16,7 +16,7 @@ pipeline {
         }
 
     }
-
+}
      
 
 
