@@ -100,14 +100,14 @@ pipeline {
                         sh'''
                         #!/bin/bash
                         ls -ltr
-
+                        '''
                         withCredentials([string(credentialsId: 'argocd_host', variable: 'host'), usernamePassword(credentialsId: 'argocd_cred', passwordVariable: 'pass', usernameVariable: 'id')]) {
                             sh 'argocd login $host  --username $id --password $pass --insecure'
                             sh 'argocd app delete swe645assn3cd   --cascade -y 2> /dev/null '
                             sh 'argocd app create -f swe645assn3_ArgoCD_config.yaml'
                         }
 
-                        '''
+                        
                 }
             }
         }
