@@ -5,11 +5,15 @@ pipeline {
         stage('Deleting the deployments and services of both Frontend and Backend containers on Kubernetes cluster') {
             steps{
                 script{
-                        sh'''
+                          sh'''
                         #!/bin/bash
                         ls -ltr
-                        kubectl delete deployment survey-deployment-be survey-deployment-ui --ignore-not-found=true
-                        kubectl delete svc surveyservicebe surveyserviceui --ignore-not-found=true
+
+                        withCredentials([string(credentialsId: 'argocd_host', variable: 'host'), usernamePassword(credentialsId: 'argocd_cred', passwordVariable: 'pass', usernameVariable: 'id')]) {
+                            sh 'argocd login $host  --username $id --password $pass --insecure '
+                            sh 'argocd app delete swe645assn3cd  --cascade -y 2> /dev/null '
+                        }
+
                         '''
                 }
             }

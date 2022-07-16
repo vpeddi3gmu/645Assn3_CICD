@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: swe645assn3cd
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/vpeddi3gmu/645Assn3_CICD.git'
+    path: argocd
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - ApplyOutOfSyncOnly=true

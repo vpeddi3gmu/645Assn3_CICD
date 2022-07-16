@@ -100,9 +100,13 @@ pipeline {
                         sh'''
                         #!/bin/bash
                         ls -ltr
-                        kubectl delete deployment survey-deployment-be survey-deployment-ui --ignore-not-found=true
-                        kubectl delete svc surveyservicebe surveyserviceui --ignore-not-found=true
-                        kubectl create -f swe645_assn3_surveyform_full_stack_deployment_config.yaml
+
+                        withCredentials([string(credentialsId: 'argocd_host', variable: 'host'), usernamePassword(credentialsId: 'argocd_cred', passwordVariable: 'pass', usernameVariable: 'id')]) {
+                            sh 'argocd login $host  --username $id --password $pass --insecure'
+                            sh 'argocd app delete swe645assn3cd   --cascade -y 2> /dev/null '
+                            sh 'argocd app create -f swe645assn3_ArgoCD_config.yaml'
+                        }
+
                         '''
                 }
             }
