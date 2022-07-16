@@ -4,7 +4,6 @@ pipeline {
         docker_backend = "vpeddi3/swe645assn3"
         docker_build = ''
         docker_frontend = "vpeddi3/swe645assn3ui"
-        git_auth_token='SWE645_GIT_ID'
     }
     agent any
     
@@ -12,12 +11,7 @@ pipeline {
         stage('Cloning Git Frontend Code') {
             steps{
                 echo 'Cloning Git for Frontend Code..'
-                withCredentials([string(credentialsId: 'SWE645_GIT_ID', variable: 'SWE645_GIT_ID')]) {
-                        git 'https://"$SWE645_GIT_ID"@github.com/vpeddi3gmu/645Assn3_UI.git'
-                }
-                
-                
-                
+                git credentialsId: 'gitlogin_token', url: 'https://github.com/vpeddi3gmu/645Assn3_UI.git'
             }
         }
 
@@ -57,10 +51,7 @@ pipeline {
          stage('Cloning Git for Backend Code') {
             steps{
                 echo 'Cloning Git for Backend Code..'
-
-                withCredentials([string(credentialsId: 'SWE645_GIT_ID', variable: 'SWE645_GIT_ID')]) {
-                    git 'https://"$SWE645_GIT_ID"@github.com/vpeddi3gmu/645Assn3_BE.git'
-                }               
+                git credentialsId: 'gitlogin_token', url: 'https://github.com/vpeddi3gmu/645Assn3_BE.git'          
             }
         }
 
@@ -97,9 +88,7 @@ pipeline {
         stage('Cloning Git for Deploying continers on Kubernetes cluster') {
             steps{
                 echo 'Cloning Git for Deploying continers on Kubernetes cluster..'
-                withCredentials([string(credentialsId: 'SWE645_GIT_ID', variable: 'SWE645_GIT_ID')]) {
-                    git 'https://"$SWE645_GIT_ID"@github.com/vpeddi3gmu/645Assn3_CICD.git'
-                } 
+                git credentialsId: 'gitlogin_token', url: 'https://github.com/vpeddi3gmu/645Assn3_CICD.git'
                 
                 
             }
