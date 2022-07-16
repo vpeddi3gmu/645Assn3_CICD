@@ -13,7 +13,7 @@ pipeline {
             steps{
                 echo 'Cloning Git for Frontend Code..'
                 withCredentials([string(credentialsId: 'SWE645_GIT_ID', variable: 'SWE645_GIT_ID')]) {
-                        git 'https://$SWE645_GIT_ID@github.com/vpeddi3gmu/645Assn3_UI.git'
+                        git 'https://"$SWE645_GIT_ID"@github.com/vpeddi3gmu/645Assn3_UI.git'
                 }
                 
                 
@@ -59,7 +59,7 @@ pipeline {
                 echo 'Cloning Git for Backend Code..'
 
                 withCredentials([string(credentialsId: 'SWE645_GIT_ID', variable: 'SWE645_GIT_ID')]) {
-                    git 'https://$SWE645_GIT_ID@github.com/vpeddi3gmu/645Assn3_BE.git'
+                    git 'https://"$SWE645_GIT_ID"@github.com/vpeddi3gmu/645Assn3_BE.git'
                 }               
             }
         }
@@ -98,7 +98,7 @@ pipeline {
             steps{
                 echo 'Cloning Git for Deploying continers on Kubernetes cluster..'
                 withCredentials([string(credentialsId: 'SWE645_GIT_ID', variable: 'SWE645_GIT_ID')]) {
-                    git 'https://$SWE645_GIT_ID@github.com/vpeddi3gmu/645Assn3_CICD.git'
+                    git 'https://"$SWE645_GIT_ID"@github.com/vpeddi3gmu/645Assn3_CICD.git'
                 } 
                 
                 
