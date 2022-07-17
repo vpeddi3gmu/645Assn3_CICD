@@ -1,6 +1,10 @@
 # Vamsi Krishna Peddi
 # 
-# This was manually written file
+# This file contains deployment and services that are to be created for deploying 
+# frontend and backend containers
+
+
+# Frontend Deplyment
 
 apiVersion: apps/v1
 kind: Deployment
@@ -30,6 +34,8 @@ spec:
 
 ---
 
+# Frontend service
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -49,9 +55,7 @@ spec:
 
 ---
 
-# Vamsi Krishna Peddi
-# 
-# This was manually written file
+# Backend Deployment
 
 apiVersion: apps/v1
 kind: Deployment
@@ -80,6 +84,9 @@ spec:
         - containerPort: 80
 
 ---
+
+
+# Backend service
 
 apiVersion: v1
 kind: Service

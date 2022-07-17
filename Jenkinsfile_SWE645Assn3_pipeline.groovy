@@ -1,3 +1,9 @@
+//Vamsi Krishna Peddi
+
+//This file is used by jenkins pipeline job which will build and deploy the 
+//both frontend and backend containers on kubernetes cluster using argocd
+
+
 pipeline {
     environment {
         docker_credentails = 'docker_cred_645_assn3'
@@ -7,6 +13,9 @@ pipeline {
     }
     agent any
     
+
+    // Frontend code Build Phase
+
     stages {
         stage('Cloning Git Frontend Code') {
             steps{
@@ -47,6 +56,7 @@ pipeline {
 
 
 
+        // Backend code Build Phase
 
          stage('Cloning Git for Backend Code') {
             steps{
@@ -84,6 +94,7 @@ pipeline {
         }
 
 
+        // Argocd deployment phase
 
         stage('Cloning Git for Deploying continers on Kubernetes cluster') {
             steps{

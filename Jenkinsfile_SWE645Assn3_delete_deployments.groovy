@@ -1,3 +1,8 @@
+//Vamsi Krishna Peddi
+
+//This file is used by jenkins pipeline job which will undeploy
+//both frontend and backend containers on kubernetes cluster using argocd
+
 pipeline {
 
     agent any

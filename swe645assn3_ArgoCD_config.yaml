@@ -1,3 +1,9 @@
+# Vamsi Krishna Peddi
+# 
+# This file contains configuration for creating the app on Argocd for deploying 
+# frontend and backend containers on kubernetes cluster
+
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
