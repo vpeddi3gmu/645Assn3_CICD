@@ -14,7 +14,7 @@ metadata:
     app: survey_form_ui_dep
     tier: survey_war_ui_dep
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: survey_form_ui
