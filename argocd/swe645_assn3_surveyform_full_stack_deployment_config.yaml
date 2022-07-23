@@ -65,7 +65,7 @@ metadata:
     app: survey_form_be_dep
     tier: survey_war_be_dep
 spec:
-  replicas: 3
+  replicas: 4
   selector:
     matchLabels:
       app: survey_form_be
